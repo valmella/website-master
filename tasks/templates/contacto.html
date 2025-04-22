@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h2 class="text-center">Contacto 🎮</h2>
+
+                <div class="mb-3">
+                    <strong>Email:</strong> <a href="mailto:videojuegos@360gamestore.com">videojuegos@360gamestore.com</a>
+                </div>
+                <div class="mb-3">
+                    <strong>Teléfono:</strong> <a href="tel:+569360360000">+56 9 3603 6000</a>
+                </div>
+
+                <form>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="correo" placeholder="Correo" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="mensaje" rows="4" placeholder="Escriba su mensaje aquí" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const nombre = document.getElementById("nombre").value;
+        const correo = document.getElementById("correo").value;
+        const mensaje = document.getElementById("mensaje").value;
+
+        const datosContacto = {
+            nombre: nombre,
+            correo: correo,
+            mensaje: mensaje
+        };
+
+        let contactosGuardados = JSON.parse(localStorage.getItem("contactos")) || [];
+
+        contactosGuardados.push(datosContacto);
+
+        localStorage.setItem("contactos", JSON.stringify(contactosGuardados));
+
+        alert("Mensaje enviado con éxito");
+
+        form.reset();
+    });
+});
+</script>
+{% endblock %}
