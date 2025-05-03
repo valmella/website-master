@@ -137,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
         'OPTIONS': {
-            'min_length': 8,   
+            'min_length': 8,   #  mínimo 8 caracteres
         }
     },
     {
@@ -147,14 +147,16 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
     
+    # Al menos un carácter especial
     {
         'NAME': 'django.contrib.auth.password_validation.RegexPasswordValidator',
         'OPTIONS': {
-            'regex': r'^(?=.*[!@#$%^&*(),.?":{}|<>])',  # Requiere al menos un carácter especial
+            'regex': r'^(?=.*[!@#$%^&*(),.?":{}|<>])', 
             'message': "La contraseña debe contener al menos un carácter especial.",
         }
     },
     
+    # Al menos una letra y un número
     {
         'NAME': 'django.contrib.auth.password_validation.RegexPasswordValidator',
         'OPTIONS': {
@@ -162,12 +164,40 @@ AUTH_PASSWORD_VALIDATORS = [
             'message': "La contraseña debe contener al menos una letra y un número.",
         }
     },
-    
+
+    # 8-20 caracteres
     {
         'NAME': 'django.contrib.auth.password_validation.RegexPasswordValidator',
         'OPTIONS': {
             'regex': r'^.{8,20}$',  
             'message': "La contraseña debe tener entre 8 y 20 caracteres.",
+        }
+    },
+
+    # Una letra mayúscula y una minúscula
+    {
+        'NAME': 'django.contrib.auth.password_validation.RegexPasswordValidator',
+        'OPTIONS': {
+            'regex': r'^(?=.*[a-z])(?=.*[A-Z])',  
+            'message': "La contraseña debe contener al menos una letra mayúscula y una letra minúscula.",
+        }
+    },
+
+    # Evitar contraseñas con caracteres repetidos 
+    {
+        'NAME': 'django.contrib.auth.password_validation.RegexPasswordValidator',
+        'OPTIONS': {
+            'regex': r'^(?!.*([a-zA-Z0-9])\1{2})',  
+            'message': "La contraseña no debe contener caracteres repetidos tres veces consecutivas.",
+        }
+    },
+
+    # Evitar secuencias simples
+    {
+        'NAME': 'django.contrib.auth.password_validation.RegexPasswordValidator',
+        'OPTIONS': {
+            'regex': r'^(?!.*(?:012|123|234|345|456|567|678|789|abcd|bcde|cdef|defg|efgh|fghi|ghij))',
+            'message': "La contraseña no debe contener secuencias numéricas o alfabéticas simples.",
         }
     },
 ]

@@ -5,6 +5,13 @@
     <div class="login-box">
         <h1>Sign in</h1>
 
+        <!-- Mostrar el mensaje de error si hay uno -->
+        {% if error %}
+            <div class="alert" style="color: red; font-weight: bold; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; margin-bottom: 10px;">
+                {{ error }}
+            </div>
+        {% endif %}
+
         <form action="/signin/" method="POST">
             {% csrf_token %}
             <div class="input-group">
@@ -20,5 +27,4 @@
     </div>
 </div>
 {% endblock %}
-
 
