@@ -1,12 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>360° GameStore</title>
-</head>
-<body>
-    <h1>¡Bienvenido a 360 GameStore!</h1>
-    <p>Este es un sitio de prueba en GitHub Pages.</p>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Inicio | 360° Gamestore{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1>🎮 Bienvenido a 360° Gamestore</h1>
+    <p>Explora nuestra galería con lo mejor del mundo gamer.</p>
+
+    <div class="row">
+        {% if videojuegos %}
+            {% for juego in videojuegos %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if juego.imagen %}
+                        <img src="{{ juego.imagen.url }}" class="card-img-top" alt="{{ juego.titulo }}">
+                    {% else %}
+                        <img src="{% static 'img/placeholder.jpg' %}" class="card-img-top" alt="Sin imagen">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ juego.titulo }}</h5>
+                        <p class="card-text">{{ juego.descripcion }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="mt-4 text-muted">Todavía no hay videojuegos disponibles. ¡Pronto llegarán los mejores títulos!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
