@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-box">
+        <h1>Sign in</h1>
+
+        <form action="/signin/" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                {{ form.username }}
+            </div>
+            <div class="input-group">
+                {{ form.password }}
+            </div>
+            <button type="submit" class="btn-submit">Iniciar sesión</button>
+        </form>
+
+        <p class="signup-link">¿No tienes una cuenta? <a href="/signup/">Inicie sesión aquí</a></p>
+    </div>
+</div>
+{% endblock %}
+
+

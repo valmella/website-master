@@ -1,0 +1,240 @@
+/* ---------- GENERAL ---------- */
+
+body {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- HEADER ---------- */
+
+header {
+    text-align: center;
+    background-color: #ffffff;
+    color: #000;
+    padding: 20px;
+    font-size: 24px;
+}
+
+/* ---------- NAV ---------- */
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    background-color: #ffffff;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #0ff; /* Neón cian */
+    font-weight: bold;
+    padding: 10px 15px;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #0ff;
+    color: #000;
+    border-radius: 5px;
+}
+
+/* ---------- CATEGORÍAS ---------- */
+
+.categorias {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 900px;
+}
+
+.categorias h2 {
+    margin-bottom: 30px;
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+}
+
+.categorias img {
+    width: 80%;
+    max-width: 600px;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+/* ---------- JUEGOS ---------- */
+
+.juegos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    justify-items: center;
+}
+
+.juegos .juego {
+    text-align: center;
+    border: 2px solid #0ff;
+    padding: 10px;
+    width: 180px;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+.juegos .juego:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 10px #0ff;
+}
+
+.juegos .juego img {
+    width: 100%;
+    height: auto;
+}
+
+/* Fila extra opcional */
+
+.fila2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+/* Espacio entre filas */
+
+.row {
+    row-gap: 40px;
+}
+
+/* ---------- CARDS / COMPONENTES ---------- */
+
+.card {
+    border: 2px solid #0ff;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+.card-img-top {
+    height: 160px;
+    object-fit: cover;
+}
+
+.card-text {
+    color: #333;
+}
+
+h1, h5 {
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+}
+
+/* ---------- BOTONES ---------- */
+
+.btn-outline-success {
+    border-color: #0ff;
+    color: #0ff;
+}
+
+.btn-outline-success:hover {
+    background-color: #0ff;
+    color: #000;
+}
+
+/* ---------- LOGO NAVBAR ---------- */
+
+.navbar-brand img {
+    border-radius: 50%;
+    border: 2px solid #0ff;
+    box-shadow: 0 0 5px #0ff;
+}
+
+/* ---------- LOGIN FORM ---------- */
+
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-box {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Input fields styles */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Submit button */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+/* Link for signup */
+.signup-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
