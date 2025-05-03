@@ -21,7 +21,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 def home(request):
     videojuegos = Videojuego.objects.all()
-    return render(request, 'home.html', {'videojuegos': videojuegos})
+    return render(request, 'index.html', {'videojuegos': videojuegos})
 
 def signup(request):
     if request.method == 'GET':

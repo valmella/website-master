@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - 360° Gamestore{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'images/halo.png' %}" class="card-img-top" alt="Halo Infinite">
+            <div class="card-body">
+                <h5 class="card-title">Halo Infinite</h5>
+                <p class="card-text">Acción futurista y combates épicos en el universo Halo.</p>
+                <a href="#" class="btn btn-primary">Ver detalles</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'images/fable.png' %}" class="card-img-top" alt="Fable">
+            <div class="card-body">
+                <h5 class="card-title">Fable</h5>
+                <p class="card-text">Una aventura de rol en un mundo de decisiones morales.</p>
+                <a href="#" class="btn btn-primary">Ver detalles</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'images/assasins.jpg' %}" class="card-img-top" alt="Assassin's Creed">
+            <div class="card-body">
+                <h5 class="card-title">Assassin's Creed</h5>
+                <p class="card-text">Explora la historia como un asesino en múltiples épocas.</p>
+                <a href="#" class="btn btn-primary">Ver detalles</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
