@@ -62,3 +62,9 @@ def editar_perfil(request):
     return render(request, 'editar_perfil.html', {'form': form})
 
 
+def accion(request):
+    url = "https://www.freetogame.com/api/games"
+    params = {"category": "action"}   
+    response = requests.get(url, params=params)
+    juegos_accion = response.json() if response.status_code == 200 else []
+    return render(request, 'accion.html', {'juegos_accion': juegos_accion})

@@ -23,12 +23,4 @@ def detalle_videojuego(request, id):
     serializer = VideojuegoSerializer(videojuego)
     return Response(serializer.data)
 
-
-def juegos_gratuitos(request):
-    url = "https://www.freetogame.com/api/games"
-    params = {
-        "platform": "pc"
-    }
-    response = requests.get(url, params=params)
-    juegos = response.json() if response.status_code == 200 else []
-    return render(request, 'juegos_gratuitos.html', {'juegos': juegos})
+ 
