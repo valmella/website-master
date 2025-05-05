@@ -1,4 +1,4 @@
-
+import oracledb
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +23,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks', 
-    'website'  
+    'website',
+    'rest_framework',  
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,13 +61,20 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'g80ca87422fa593_website_high.adb.oraclecloud.com',
+        'USER': 'ADMIN',   
+        'PASSWORD': 'Sqldeveloper123',
+        'HOST': 'adb.sa-santiago-1.oraclecloud.com',
+        'PORT': '1522',
+        'OPTIONS': {'wallet_location': 'C:/Users/vlntn/OneDrive/Escritorio/website-master-main/Wallet_Website'
+        }
     }
 }
+
+
 
 
 # Password validation
@@ -201,3 +208,5 @@ AUTH_PASSWORD_VALIDATORS = [
         }
     },
 ]
+
+

@@ -1,10 +1,9 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-
-class Tarea(models.Model):
-    titulo = models.CharField(max_length=100)
-    descripcion = models.TextField()
+from rest_framework import generics
+from .models import Pago
+from .serializers import PagoSerializer 
 
 class Admin(models.Model):
     nombre = models.CharField(max_length=50)
@@ -38,7 +37,6 @@ class Videojuego(models.Model):
     def __str__(self):
         return self.nombre
 
-
 class Cliente(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
@@ -62,7 +60,6 @@ class Pago(models.Model):
     metodo = models.CharField(max_length=50, null=True, blank=True)  # Permitir valores nulos
     monto = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
-
     def __str__(self):
 
         return f"{self.metodo} - {self.monto}"
@@ -75,3 +72,7 @@ class DetalleCarrito(models.Model):
     carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
     videojuego = models.ForeignKey(Videojuego, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
+
+class PagoCreateAPIView(generics.CreateAPIView):
+    queryset = Pago.objects.all()
+    serializer_class = PagoSerializer
