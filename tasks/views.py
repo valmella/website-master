@@ -1,4 +1,4 @@
- from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User, Group
@@ -7,8 +7,8 @@ from .forms import VideojuegoForm, UsuarioForm
 from .models import Videojuego, Usuario, Pago
 import json
 from django.http import JsonResponse
+import requests
 
-# Funciones para vistas basadas en formularios, creación de usuarios, autenticación, etc.
 def home(request):
     videojuegos = Videojuego.objects.all()
     return render(request, 'index.html', {'videojuegos': videojuegos})
@@ -64,7 +64,43 @@ def editar_perfil(request):
 
 def accion(request):
     url = "https://www.freetogame.com/api/games"
-    params = {"category": "action"}   
+    params = {"category": "accion"}   
     response = requests.get(url, params=params)
     juegos_accion = response.json() if response.status_code == 200 else []
     return render(request, 'accion.html', {'juegos_accion': juegos_accion})
+
+ def aventura(request):
+    url = "https://www.freetogame.com/api/games"
+    params = {"category": "aventura"}   
+    response = requests.get(url, params=params)
+    juegos_aventura = response.json() if response.status_code == 200 else []
+    return render(request, 'aventura.html', {'juegos_aventura': juegos_aventura})
+
+def carreras(request):
+    url = "https://www.freetogame.com/api/games"
+    params = {"category": "carreras"}   
+    response = requests.get(url, params=params)
+    juegos_carreras = response.json() if response.status_code == 200 else []
+    return render(request, 'carerras.html', {'juegos_carreras': juegos_carreras})
+
+def deporte(request):
+    url = "https://www.freetogame.com/api/games"
+    params = {"category": "deporte"}   
+    response = requests.get(url, params=params)
+    juegos_deporte = response.json() if response.status_code == 200 else []
+    return render(request, 'deporte.html', {'juegos_deporte': juegos_deporte})
+
+def estrategia(request):
+    url = "https://www.freetogame.com/api/games"
+    params = {"category": "estrategia"}   
+    response = requests.get(url, params=params)
+    juegos_estrategia = response.json() if response.status_code == 200 else []
+    return render(request, 'estrategia.html', {'juegos_estrategia': juegos_estrategia})
+
+def ingenio(request):
+    url = "https://www.freetogame.com/api/games"
+    params = {"category": "ingenio"}   
+    response = requests.get(url, params=params)
+    juegos_ingenio = response.json() if response.status_code == 200 else []
+    return render(request, 'ingenio.html', {'juegos_ingenio': juegos_ingenio})
+
