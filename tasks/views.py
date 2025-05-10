@@ -9,98 +9,139 @@ import json
 from django.http import JsonResponse
 import requests
 
+# Vistas principales
 def home(request):
-    videojuegos = Videojuego.objects.all()
-    return render(request, 'index.html', {'videojuegos': videojuegos})
+    return render(request, 'home.html')
 
-@login_required
-@csrf_exempt
-def guardar_carrito(request):
+def vista_admin(request):
+    return render(request, 'admin.html')
+
+def signin(request):
     if request.method == 'POST':
-        cart_data = request.POST.get('cart_data', '[]')
-        carrito = json.loads(cart_data)
+        # Lógica de inicio de sesión
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'signin.html', {'error': 'Credenciales inválidas'})
+    return render(request, 'signin.html')
 
-        for item in carrito:
-            Pago.objects.create(
-                usuario=request.user,
-                nombre_producto=item['name'],
-                cantidad=item['quantity'],
-                precio_unitario=item['price'],
-                total=item['price'] * item['quantity']
-            )
+def signup(request):
+    if request.method == 'POST':
+        # Lógica de registro de usuario
+        return redirect('signin')
+    return render(request, 'signup.html')
 
-        return JsonResponse({'status': 'ok', 'message': 'Carrito guardado con éxito'})
-    return JsonResponse({'status': 'error', 'message': 'Método no permitido'})
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
-@login_required
-def pago_view(request):
-    total = request.session.get('cart_total', 0)
-    return render(request, 'pago.html', {'total': total})
-
-# Para roles de usuarios
-def crear_roles(request):
-    Group.objects.get_or_create(name='Administrador')
-    Group.objects.get_or_create(name='Cliente')
-    return render(request, 'roles_creados.html')
-
-def asignar_rol(request):
-    usuario = User.objects.get(username='valentina')
-    grupo = Group.objects.get(name='Administrador')
-    usuario.groups.add(grupo)
-    return render(request, 'rol_asignado.html')
-
-# Vistas para editar perfil de usuario
 def editar_perfil(request):
-    if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('home')  
-    else:
-        form = UserChangeForm(instance=request.user)
-    
-    return render(request, 'editar_perfil.html', {'form': form})
+    return render(request, 'editar_perfil.html')
 
+def vista_cliente(request):
+    return render(request, 'cliente.html')
 
+def tasks(request):
+    return render(request, 'tasks.html')
+
+def contacto(request):
+    return render(request, 'contacto.html')
+
+# Categorías de videojuegos
 def accion(request):
-    url = "https://www.freetogame.com/api/games"
-    params = {"category": "accion"}   
-    response = requests.get(url, params=params)
-    juegos_accion = response.json() if response.status_code == 200 else []
-    return render(request, 'accion.html', {'juegos_accion': juegos_accion})
+    return render(request, 'accion.html')
 
- def aventura(request):
-    url = "https://www.freetogame.com/api/games"
-    params = {"category": "aventura"}   
-    response = requests.get(url, params=params)
-    juegos_aventura = response.json() if response.status_code == 200 else []
-    return render(request, 'aventura.html', {'juegos_aventura': juegos_aventura})
+def aventura(request):
+    return render(request, 'aventura.html')
 
 def carreras(request):
-    url = "https://www.freetogame.com/api/games"
-    params = {"category": "carreras"}   
-    response = requests.get(url, params=params)
-    juegos_carreras = response.json() if response.status_code == 200 else []
-    return render(request, 'carerras.html', {'juegos_carreras': juegos_carreras})
+    return render(request, 'carreras.html')
 
 def deporte(request):
-    url = "https://www.freetogame.com/api/games"
-    params = {"category": "deporte"}   
-    response = requests.get(url, params=params)
-    juegos_deporte = response.json() if response.status_code == 200 else []
-    return render(request, 'deporte.html', {'juegos_deporte': juegos_deporte})
+    return render(request, 'deporte.html')
 
 def estrategia(request):
-    url = "https://www.freetogame.com/api/games"
-    params = {"category": "estrategia"}   
-    response = requests.get(url, params=params)
-    juegos_estrategia = response.json() if response.status_code == 200 else []
-    return render(request, 'estrategia.html', {'juegos_estrategia': juegos_estrategia})
+    return render(request, 'estrategia.html')
 
 def ingenio(request):
-    url = "https://www.freetogame.com/api/games"
-    params = {"category": "ingenio"}   
-    response = requests.get(url, params=params)
-    juegos_ingenio = response.json() if response.status_code == 200 else []
-    return render(request, 'ingenio.html', {'juegos_ingenio': juegos_ingenio})
+    return render(request, 'ingenio.html')
 
+def rpg(request):
+    return render(request, 'rpg.html')
+
+# Carrito y pagos
+def carrito(request):
+    return render(request, 'carrito.html')
+
+def guardar_carrito(request):
+    return JsonResponse({"status": "Carrito guardado"})
+
+def pago_view(request):
+    return render(request, 'pago.html')
+
+def procesar_pago(request):
+    return JsonResponse({"status": "Pago procesado"})
+
+# API de usuarios
+def obtener_usuarios(request):
+    # Lógica para obtener todos los usuarios
+    return JsonResponse({"usuarios": []})
+
+def obtener_usuario(request, id):
+    # Lógica para obtener un usuario por ID
+    return JsonResponse({"usuario": {}})
+
+def crear_usuario(request):
+    # Lógica para crear un usuario
+    return JsonResponse({"status": "Usuario creado"})
+
+def actualizar_usuario(request, id):
+    # Lógica para actualizar un usuario
+    return JsonResponse({"status": "Usuario actualizado"})
+
+def eliminar_usuario(request, id):
+    # Lógica para eliminar un usuario
+    return JsonResponse({"status": "Usuario eliminado"})
+
+# API de videojuegos
+def listar_videojuegos(request):
+    # Lógica para listar videojuegos
+    return JsonResponse({"videojuegos": []})
+
+def detalle_videojuego(request, id):
+    # Lógica para obtener detalles de un videojuego por ID
+    return JsonResponse({"videojuego": {}})
+
+# Administración de usuarios
+def lista_usuarios(request):
+    return render(request, 'lista_usuarios.html')
+
+def editar_usuario(request, id):
+    return render(request, 'editar_usuario.html')
+
+def eliminar_usuario(request, id):
+    return redirect('lista_usuarios')
+
+# Gestión de roles
+def crear_roles(request):
+    return render(request, 'crear_roles.html')
+
+def asignar_rol(request):
+    return render(request, 'asignar_rol.html')
+
+# Recuperación de contraseña (estas vistas están integradas con Django)
+from django.contrib.auth import views as auth_views
+
+password_reset_view = auth_views.PasswordResetView.as_view()
+password_reset_done_view = auth_views.PasswordResetDoneView.as_view()
+password_reset_confirm_view = auth_views.PasswordResetConfirmView.as_view()
+password_reset_complete_view = auth_views.PasswordResetCompleteView.as_view()
+
+
+class PagoCreateAPIView(generics.CreateAPIView):
+    queryset = Pago.objects.all()
+    serializer_class = PagoSerializer

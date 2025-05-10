@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .models import Pago
 from .serializers import PagoSerializer 
 
 class Admin(models.Model):
